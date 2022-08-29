@@ -5,8 +5,11 @@ import Home from './component/homepage'
 import Login from './component/login'
 import Register from './component/reg'
 import Todos from './component/todo'
+import { useSelector, useDispatch } from 'react-redux'
 
 function App() {
+  const auth = useSelector((state) => state.Auth.value)
+console.log(auth)
   return (
     <Routes>
     <Route path="/" element={<Home />}>

@@ -1,4 +1,4 @@
-const express =require('express')
+ const express =require('express')
 var jwt = require('jsonwebtoken');
 var body= require('body-parser');
 const app=express()
@@ -17,13 +17,14 @@ app.get('/loged',loged)
  app.post('/login',login)
 
 
+dataconnect().then(()=>{
 
-
-   app.listen(4000,(err,res)=>{
+   app.listen(3000,(err,res)=>{
       if(err)
       console.log(err)
       else
-      console.log(`Server is Started at 4000`)
+      console.log(`Server is Started at 3000`)
    })
+})
 
 

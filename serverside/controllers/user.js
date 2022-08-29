@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
  const crypto =require('crypto');
 
 const main = require('./emal.send');
+const { findOne } = require('../database/user');
 
 async function register(req, res) {
    //  const {}=req.body
@@ -45,7 +46,8 @@ async function login(req, res) {
    const mathed = bcrypt.compareSync(password, user.password)
    let userdata = {
       email: user.email,
-      username: user.username
+      username: user.username,
+      id:user._id
 
    }
    if (mathed) {
@@ -98,6 +100,38 @@ async function loged(req, res) {
 
 }
 
+
+async function addtask(req, res){
+   
+   var id = req.params.id
+   var todo={
+      taks:"miltk",
+      status:"panding"
+   }
+
+  usermodel.findOneAndUpdate({_id:id},{ $push: { todos: todo} },(err,response)=>{
+   if(err)
+   res.send(err)
+   else
+   res.send(response)
+  })
+}
+
+
+async function task(req, res) {
+   var id = req.params.id
+   usermodel.find({_id:id},(err,response)=>{
+      if(err)
+      res.send(err)
+      else if(response)
+      res.send(response)
+      else
+      res.send({
+         'response':'erro'
+      })
+   })
+}
+
 module.exports = {
-   login, register, loged
+   login, register, loged,addtask,task
 }

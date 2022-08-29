@@ -7,7 +7,7 @@
         username:String,
     password: String,
     email: String,
-    isEmialverfied:Boolean,
+   
     emailOTP:Number,
     todos:[Object]
     
